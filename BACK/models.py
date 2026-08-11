@@ -1,6 +1,7 @@
 import uuid
-import datetime
+from datetime import datetime, timezone
 from sqlalchemy import Column, String, Boolean, Float, Integer, Text, ForeignKey, DateTime, Date
+from sqlalchemy.dialects.postgresql import JSONB
 from database import Base
 
 
@@ -94,8 +95,6 @@ class DisguiseLog(Base):
     lng = Column(Float, nullable=True)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
-# ===================== models.py 추가분 =====================
-from sqlalchemy.dialects.postgresql import JSONB
 
 class MonitoringSession(Base):
     __tablename__ = "monitoring_sessions"
@@ -105,19 +104,19 @@ class MonitoringSession(Base):
     guardian_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     status = Column(String, nullable=False, default="NORMAL")  # NORMAL | EMERGENCY | CLOSED
 
-    start_location = Column(String, nullable=False)   # 출발지 주소(텍스트)
-    end_location = Column(String, nullable=False)      # 도착지 주소(텍스트)
+    start_location = Column(String, nullable=False)   # 출발지 주소
+    end_location = Column(String, nullable=False)     # 도착지 주소
     start_lat = Column(Float, nullable=True)
     start_lng = Column(Float, nullable=True)
     end_lat = Column(Float, nullable=True)
     end_lng = Column(Float, nullable=True)
 
-    route_geojson = Column(JSONB, nullable=True)        # AI 길찾기 API 응답 원본 (세션 생성 시 1회 저장)
-    route_profile = Column(String, nullable=True)        # 'foot' | 'drive'
+    route_geojson = Column(JSONB, nullable=True)
+    route_profile = Column(String, nullable=True)
     estimated_time_minutes = Column(Integer, nullable=False)
 
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     started_at = Column(DateTime, nullable=True)
     ended_at = Column(DateTime, nullable=True)
 
@@ -129,63 +128,14 @@ class ExternalApiCache(Base):
     cache_key = Column(String, unique=True, nullable=False)
     response_body = Column(JSONB, nullable=False)
     expires_at = Column(DateTime, nullable=False)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class MonitoringLocationLog(Base):
-    """3단계(WebSocket) 연동 대비 — 실시간 위치 전체 이력. 지금은 스키마만 매핑."""
     __tablename__ = "monitoring_location_logs"
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     session_id = Column(String, ForeignKey("monitoring_sessions.id", ondelete="CASCADE"), nullable=False)
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
-    logged_at = Column(DateTime, default=datetime.datetime.utcnow)
-
-# ===================== models.py 추가분 =====================
-from sqlalchemy.dialects.postgresql import JSONB
-
-class MonitoringSession(Base):
-    __tablename__ = "monitoring_sessions"
-
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    ward_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    guardian_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    status = Column(String, nullable=False, default="NORMAL")  # NORMAL | EMERGENCY | CLOSED
-
-    start_location = Column(String, nullable=False)   # 출발지 주소(텍스트)
-    end_location = Column(String, nullable=False)      # 도착지 주소(텍스트)
-    start_lat = Column(Float, nullable=True)
-    start_lng = Column(Float, nullable=True)
-    end_lat = Column(Float, nullable=True)
-    end_lng = Column(Float, nullable=True)
-
-    route_geojson = Column(JSONB, nullable=True)        # AI 길찾기 API 응답 원본 (세션 생성 시 1회 저장)
-    route_profile = Column(String, nullable=True)        # 'foot' | 'drive'
-    estimated_time_minutes = Column(Integer, nullable=False)
-
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
-    started_at = Column(DateTime, nullable=True)
-    ended_at = Column(DateTime, nullable=True)
-
-
-class ExternalApiCache(Base):
-    __tablename__ = "external_api_cache"
-
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    cache_key = Column(String, unique=True, nullable=False)
-    response_body = Column(JSONB, nullable=False)
-    expires_at = Column(DateTime, nullable=False)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-
-
-class MonitoringLocationLog(Base):
-    """3단계(WebSocket) 연동 대비 — 실시간 위치 전체 이력. 지금은 스키마만 매핑."""
-    __tablename__ = "monitoring_location_logs"
-
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    session_id = Column(String, ForeignKey("monitoring_sessions.id", ondelete="CASCADE"), nullable=False)
-    latitude = Column(Float, nullable=False)
-    longitude = Column(Float, nullable=False)
-    logged_at = Column(DateTime, default=datetime.datetime.utcnow)
+    logged_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
