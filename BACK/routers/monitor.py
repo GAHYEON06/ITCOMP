@@ -1,28 +1,178 @@
+import time
+import uuid
+import datetime
+import logging
+from typing import Optional, Literal, Any
+
+import requests
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
 from database import get_db
 import models
 from models import User, UserRelationship, SirenLog
 from .deps import current_user
-from .fcm_service import send_fcm_notification  # 👈 FCM 푸시 알림 발송 함수 임포트
+from .fcm_service import send_fcm_notification
 
-router = APIRouter(prefix="/monitor", tags=["Monitor & Matching"])
+logger = logging.getLogger("monitor")
+
+router = APIRouter(prefix="/api/v1/monitoring", tags=["Monitor & Matching"])
+
+# ==========================================
+# 1. Pydantic 스키마 정의
+# ==========================================
+class CommonResponse(BaseModel):
+    status: int
+    message: str
+    data: Optional[Any] = None
 
 class LinkReq(BaseModel):
     wardcode: str
 
-class MonitorStartReq(BaseModel):
-    start_loc: str
-    dest_loc: str
-    lat: float
-    lng: float
-    progress: int = 0
-    estimated_time_minutes: int = 20
+class MonitoringSessionCreateRequest(BaseModel):
+    ward_id: str = Field(..., description="피보호자 ID")
+    guardian_id: str = Field(..., description="보호자 ID")
+    start_location: Optional[str] = Field(None, description="출발지 명칭")
+    start_lat: float
+    start_lng: float
+    end_location: Optional[str] = Field(None, description="도착지 명칭")
+    end_lat: float
+    end_lng: float
+    route_profile: Literal["foot", "drive"] = Field("foot", description="이동 수단")
 
-# 1. 보호자 -> 피보호자 연결
+class MonitoringSessionResponse(BaseModel):
+    id: str
+    ward_id: str
+    guardian_id: str
+    status: str
+    start_location: Optional[str]
+    start_lat: float
+    start_lng: float
+    end_location: Optional[str]
+    end_lat: float
+    end_lng: float
+    route_profile: str
+    route_geojson: Optional[dict]
+    estimated_time_minutes: Optional[int]
+    websocket_channel: str
+    created_at: datetime.datetime
+    started_at: Optional[datetime.datetime]
+    ended_at: Optional[datetime.datetime]
+
+    class Config:
+        from_attributes = True
+
+
+# ==========================================
+# 2. OSRM 및 캐시 설정 / 헬퍼 함수
+# ==========================================
+OSRM_BASE_URL = "https://router.project-osrm.org"
+ROUTE_CACHE_TTL_SECONDS = 60 * 60  # 캐시 유효시간 1시간
+REQUEST_TIMEOUT_SECONDS = 5
+MAX_RETRIES = 3
+RETRY_BACKOFF_SECONDS = 0.5
+
+PROFILE_MAP = {
+    "foot": "foot",
+    "drive": "driving",
+}
+
+def _build_cache_key(profile: str, start_lat: float, start_lng: float, end_lat: float, end_lng: float) -> str:
+    return (
+        f"osrm:{profile}:"
+        f"{round(start_lat, 5)},{round(start_lng, 5)}:"
+        f"{round(end_lat, 5)},{round(end_lng, 5)}"
+    )
+
+def _get_cached_route(db: Session, cache_key: str) -> dict | None:
+    cache_row = (
+        db.query(models.ExternalApiCache)
+        .filter(models.ExternalApiCache.cache_key == cache_key)
+        .first()
+    )
+    if cache_row is None or cache_row.expires_at < datetime.datetime.utcnow():
+        return None
+    return cache_row.response_body
+
+def _upsert_cache(db: Session, cache_key: str, response_body: dict) -> None:
+    expires_at = datetime.datetime.utcnow() + datetime.timedelta(seconds=ROUTE_CACHE_TTL_SECONDS)
+    cache_row = (
+        db.query(models.ExternalApiCache)
+        .filter(models.ExternalApiCache.cache_key == cache_key)
+        .first()
+    )
+    if cache_row:
+        cache_row.response_body = response_body
+        cache_row.expires_at = expires_at
+    else:
+        cache_row = models.ExternalApiCache(
+            id=str(uuid.uuid4()),
+            cache_key=cache_key,
+            response_body=response_body,
+            expires_at=expires_at,
+        )
+        db.add(cache_row)
+    db.commit()
+
+def _call_osrm_api(profile: str, start_lat: float, start_lng: float, end_lat: float, end_lng: float) -> dict:
+    osrm_profile = PROFILE_MAP[profile]
+    url = (
+        f"{OSRM_BASE_URL}/route/v1/{osrm_profile}/"
+        f"{start_lng},{start_lat};{end_lng},{end_lat}"
+        f"?overview=full&geometries=geojson"
+    )
+
+    last_error: Exception | None = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            resp = requests.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
+            if resp.status_code == 200:
+                data = resp.json()
+                if data.get("code") != "Ok" or not data.get("routes"):
+                    raise ValueError(f"OSRM 응답 오류: {data.get('code')}")
+                return data
+            if 400 <= resp.status_code < 500:
+                raise HTTPException(status_code=502, detail=f"길찾기 API 요청 오류 (status={resp.status_code})")
+            last_error = ValueError(f"OSRM 5xx 응답: {resp.status_code}")
+        except (requests.exceptions.RequestException, ValueError) as e:
+            last_error = e
+            logger.warning(f"[OSRM] {attempt}/{MAX_RETRIES}차 시도 실패: {e}")
+
+        if attempt < MAX_RETRIES:
+            time.sleep(RETRY_BACKOFF_SECONDS * attempt)
+
+    raise HTTPException(status_code=503, detail="길찾기 API 응답 실패 (재시도 초과)")
+
+def get_route(db: Session, profile: str, start_lat: float, start_lng: float, end_lat: float, end_lng: float) -> dict:
+    cache_key = _build_cache_key(profile, start_lat, start_lng, end_lat, end_lng)
+    cached = _get_cached_route(db, cache_key)
+    if cached is not None:
+        return cached
+
+    fresh_data = _call_osrm_api(profile, start_lat, start_lng, end_lat, end_lng)
+    _upsert_cache(db, cache_key, fresh_data)
+    return fresh_data
+
+def _extract_geojson_and_eta(osrm_response: dict) -> tuple[dict, int]:
+    route = osrm_response["routes"][0]
+    geojson = route["geometry"]
+    duration_seconds = route["duration"]
+    estimated_time_minutes = max(1, round(duration_seconds / 60))
+    return geojson, estimated_time_minutes
+
+
+# ==========================================
+# 3. API 엔드포인트
+# ==========================================
+
+# 1) 보호자 -> 피보호자 매칭 연결
 @router.post("/link")
-def link_guardian(data: LinkReq, db: Session = Depends(get_db), u: User = Depends(current_user)):
+def link_guardian(
+    data: LinkReq, 
+    db: Session = Depends(get_db), 
+    u: User = Depends(current_user)
+):
     if str(u.role).lower() != "guardian":
         raise HTTPException(403, "보호자 계정만 피보호자를 연결할 수 있습니다.")
 
@@ -34,7 +184,6 @@ def link_guardian(data: LinkReq, db: Session = Depends(get_db), u: User = Depend
         db.add(UserRelationship(guardian_id=u.id, ward_id=ward.id))
         db.commit()
         
-    # 🔔 연결 성공 시 피보호자에게 알림 전송 (선택사항)
     if ward.fcm_token:
         send_fcm_notification(
             target_token=ward.fcm_token,
@@ -45,7 +194,7 @@ def link_guardian(data: LinkReq, db: Session = Depends(get_db), u: User = Depend
 
     return {"status": "ok", "message": f"{ward.username} 피보호자와 성공적으로 연결되었습니다."}
 
-# 2. [보호자 전용] 연결된 피보호자 목록 조회
+# 2) 연결된 피보호자 목록 조회
 @router.get("/wards")
 def get_wards(db: Session = Depends(get_db), u: User = Depends(current_user)):
     if str(u.role).lower() != "guardian":
@@ -68,7 +217,7 @@ def get_wards(db: Session = Depends(get_db), u: User = Depends(current_user)):
         ]
     }
 
-# 3. [피보호자 전용] 나를 보호하는 보호자 목록 조회
+# 3) 나를 보호하는 보호자 목록 조회
 @router.get("/guardians")
 def get_guardians(db: Session = Depends(get_db), u: User = Depends(current_user)):
     if str(u.role).lower() != "ward":
@@ -90,48 +239,139 @@ def get_guardians(db: Session = Depends(get_db), u: User = Depends(current_user)
         ]
     }
 
-# 4. [알림 핵심] 피보호자가 이동/길찾기 시작 시 보호자에게 FCM 알림 발송
-@router.post("/start")
-def monitor_start(
-    data: MonitorStartReq, 
-    db: Session = Depends(get_db), 
+# 4) [핵심] 길찾기 AI 경로 생성 및 모니터링 세션 시작 (+ FCM 알림 전송)
+@router.post("/sessions", response_model=CommonResponse)
+def create_monitoring_session(
+    payload: MonitoringSessionCreateRequest,
+    db: Session = Depends(get_db),
     u: User = Depends(current_user)
 ):
-    if str(u.role).lower() != "ward":
-        raise HTTPException(403, "피보호자만 이동 모니터링을 시작할 수 있습니다.")
+    # 관계 검증 (매칭된 사용자인지 확인)
+    rel = db.query(UserRelationship).filter_by(
+        guardian_id=payload.guardian_id, 
+        ward_id=payload.ward_id
+    ).first()
+    if not rel:
+        raise HTTPException(status_code=403, detail="연결된 보호자-피보호자 관계가 아닙니다.")
 
-    # 피보호자(u.id)와 연결된 보호자들 찾기
-    rels = db.query(UserRelationship).filter_by(ward_id=u.id).all()
-    guardian_ids = [r.guardian_id for r in rels]
-    guardians = db.query(User).filter(User.id.in_(guardian_ids)).all()
+    # OSRM 길찾기 수행 (캐싱 처리 포함)
+    osrm_response = get_route(
+        db=db,
+        profile=payload.route_profile,
+        start_lat=payload.start_lat,
+        start_lng=payload.start_lng,
+        end_lat=payload.end_lat,
+        end_lng=payload.end_lng,
+    )
+    route_geojson, estimated_time_minutes = _extract_geojson_and_eta(osrm_response)
 
-    notified_count = 0
-    # 연결된 모든 보호자들에게 푸시 알림 전송
-    for g in guardians:
-        if g.fcm_token:
-            success = send_fcm_notification(
-                target_token=g.fcm_token,
-                title="🚶‍♂️ [안전 모니터링] 이동 시작",
-                body=f"[{u.username}] 피보호자가 {data.dest_loc}(으)로 이동을 시작했습니다.",
-                data_payload={
-                    "type": "MONITOR_START",
-                    "ward_id": u.id,
-                    "dest_loc": data.dest_loc,
-                    "lat": str(data.lat),
-                    "lng": str(data.lng)
-                }
-            )
-            if success:
-                notified_count += 1
+    now = datetime.datetime.utcnow()
+    session_id = str(uuid.uuid4())
 
-    return {
-        "status": "ok", 
-        "message": f"모니터링 시작 알림을 전송했습니다. (보호자 {notified_count}명 전송 성공)", 
-        "lat": data.lat, 
-        "lng": data.lng
-    }
+    new_session = models.MonitoringSession(
+        id=session_id,
+        ward_id=payload.ward_id,
+        guardian_id=payload.guardian_id,
+        status="NORMAL",
+        start_location=payload.start_location,
+        start_lat=payload.start_lat,
+        start_lng=payload.start_lng,
+        end_location=payload.end_location,
+        end_lat=payload.end_lat,
+        end_lng=payload.end_lng,
+        route_geojson=route_geojson,
+        route_profile=payload.route_profile,
+        estimated_time_minutes=estimated_time_minutes,
+        created_at=now,
+        updated_at=now,
+        started_at=now,
+    )
 
-# 5. 피보호자 최신 위치 조회
+    db.add(new_session)
+    db.commit()
+    db.refresh(new_session)
+
+    # FCM 알림 전송 (보호자에게 알림)
+    guardian = db.query(User).filter_by(id=payload.guardian_id).first()
+    ward = db.query(User).filter_by(id=payload.ward_id).first()
+    
+    if guardian and guardian.fcm_token:
+        send_fcm_notification(
+            target_token=guardian.fcm_token,
+            title="🚶‍♂️ [안전 모니터링] 이동 시작",
+            body=f"[{ward.username if ward else '피보호자'}]님이 이동을 시작했습니다.",
+            data_payload={
+                "type": "MONITOR_START",
+                "session_id": session_id,
+                "ward_id": payload.ward_id,
+                "dest_loc": payload.end_location or "",
+            }
+        )
+
+    response_data = MonitoringSessionResponse(
+        id=new_session.id,
+        ward_id=new_session.ward_id,
+        guardian_id=new_session.guardian_id,
+        status=new_session.status,
+        start_location=new_session.start_location,
+        start_lat=new_session.start_lat,
+        start_lng=new_session.start_lng,
+        end_location=new_session.end_location,
+        end_lat=new_session.end_lat,
+        end_lng=new_session.end_lng,
+        route_profile=new_session.route_profile,
+        route_geojson=new_session.route_geojson,
+        estimated_time_minutes=new_session.estimated_time_minutes,
+        websocket_channel=f"monitoring:{new_session.id}",
+        created_at=new_session.created_at,
+        started_at=new_session.started_at,
+        ended_at=new_session.ended_at,
+    )
+
+    return CommonResponse(
+        status=201,
+        message="모니터링 세션이 성공적으로 생성되었습니다.",
+        data=response_data.model_dump(mode="json"),
+    )
+
+# 5) 모니터링 세션 상세 조회
+@router.get("/sessions/{session_id}", response_model=CommonResponse)
+def get_monitoring_session(session_id: str, db: Session = Depends(get_db)):
+    session_row = (
+        db.query(models.MonitoringSession)
+        .filter(models.MonitoringSession.id == session_id)
+        .first()
+    )
+    if session_row is None:
+        raise HTTPException(status_code=404, detail="모니터링 세션을 찾을 수 없습니다.")
+
+    response_data = MonitoringSessionResponse(
+        id=session_row.id,
+        ward_id=session_row.ward_id,
+        guardian_id=session_row.guardian_id,
+        status=session_row.status,
+        start_location=session_row.start_location,
+        start_lat=session_row.start_lat,
+        start_lng=session_row.start_lng,
+        end_location=session_row.end_location,
+        end_lat=session_row.end_lat,
+        end_lng=session_row.end_lng,
+        route_profile=session_row.route_profile,
+        route_geojson=session_row.route_geojson,
+        estimated_time_minutes=session_row.estimated_time_minutes,
+        websocket_channel=f"monitoring:{session_row.id}",
+        created_at=session_row.created_at,
+        started_at=session_row.started_at,
+        ended_at=session_row.ended_at,
+    )
+
+    return CommonResponse(
+        status=200,
+        message="조회 성공",
+        data=response_data.model_dump(mode="json"),
+    )
+
+# 6) 피보호자 최근 위치 조회 (SirenLog 기준)
 @router.get("/wards/{id}/location")
 def ward_location(id: str, db: Session = Depends(get_db), u: User = Depends(current_user)):
     log = db.query(SirenLog).filter_by(user_id=id).order_by(SirenLog.created_at.desc()).first()
