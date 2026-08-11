@@ -1,0 +1,94 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "안전 경로 추천 AI: ZIP_R0",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://zip-r0.vercel.app"
+    }
+  ],
+  "paths": {
+    "/auth/signup/ward": {
+      "post": {
+        "tags": ["Auth & User"],
+        "summary": "Signup Ward",
+        "responses": { "201": { "description": "Successful Response" } }
+      }
+    },
+    "/auth/signup/guardian": {
+      "post": {
+        "tags": ["Auth & User"],
+        "summary": "Signup Guardian",
+        "responses": { "201": { "description": "Successful Response" } }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth & User"],
+        "summary": "Login",
+        "responses": { "200": { "description": "Successful Response" } }
+      }
+    },
+    "/fcm/register": {
+      "post": {
+        "tags": ["Auth & User"],
+        "summary": "Register FCM Token",
+        "responses": { "200": { "description": "Successful Response" } }
+      }
+    },
+    "/community/posts": {
+      "get": {
+        "tags": ["Community"],
+        "summary": "Get Nearby Posts",
+        "parameters": [
+          { "name": "lat", "in": "query", "schema": { "type": "number" } },
+          { "name": "lng", "in": "query", "schema": { "type": "number" } },
+          { "name": "category", "in": "query", "schema": { "type": "string" } },
+          { "name": "keyword", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Successful Response" } }
+      },
+      "post": {
+        "tags": ["Community"],
+        "summary": "Create Post",
+        "responses": { "201": { "description": "Successful Response" } }
+      }
+    },
+    "/settings": {
+      "get": {
+        "tags": ["User Settings"],
+        "summary": "Get Settings",
+        "responses": { "200": { "description": "Successful Response" } }
+      },
+      "patch": {
+        "tags": ["User Settings"],
+        "summary": "Update Settings",
+        "responses": { "200": { "description": "Successful Response" } }
+      }
+    },
+    "/emergency/siren/me": {
+      "post": {
+        "tags": ["Emergency & Disguise"],
+        "summary": "Trigger Siren Me",
+        "parameters": [
+          { "name": "lat", "in": "query", "schema": { "type": "number" } },
+          { "name": "lng", "in": "query", "schema": { "type": "number" } }
+        ],
+        "responses": { "200": { "description": "Successful Response" } }
+      }
+    },
+    "/emergency/disguise/me": {
+      "post": {
+        "tags": ["Emergency & Disguise"],
+        "summary": "Trigger Disguise Me",
+        "parameters": [
+          { "name": "lat", "in": "query", "schema": { "type": "number" } },
+          { "name": "lng", "in": "query", "schema": { "type": "number" } }
+        ],
+        "responses": { "200": { "description": "Successful Response" } }
+      }
+    }
+  }
+}
