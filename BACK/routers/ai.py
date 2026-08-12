@@ -3,14 +3,10 @@ import json
 from fastapi import APIRouter, status
 from pydantic import BaseModel
 from typing import List
-import google.generativeai as genai
+
+# 신규 Google GenAI SDK 임포트
+from google import genai
 from google.genai import types
-
-# API 키 설정
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-
-# 모델 호출 시
-model = genai.GenerativeModel('gemini-2.5-flash')
 
 # 엔드포인트 주소: /ai/briefing
 router = APIRouter(prefix="/ai", tags=["AI Recommendation"])
@@ -41,6 +37,7 @@ def get_ai_briefing(data: AIBriefingRequest):
         )
 
     try:
+        # Client 생성
         client = genai.Client(api_key=GEMINI_API_KEY)
 
         prompt = f"""
@@ -48,7 +45,7 @@ def get_ai_briefing(data: AIBriefingRequest):
         시간대: {'야간(밤)' if data.isNight else '주간(낮)'}
         경로 인프라: 파출소 {data.policeCount}개, 비상벨 {data.bellCount}개, 종합 안전점수 {data.safetyScore}점.
 
-        이 정보를 바탕으로 사용자 안심용 한줄 요약 문구(tagline)와 태그 3개(safetyTags)를 JSON 형식으로 작성해줘.
+        이 정보를 바탕으로 사용자 안심용 한줄 요약 문구(tagline)와 태그 3개(safetyTags)를 작성해줘.
         """
 
         response = client.models.generate_content(
