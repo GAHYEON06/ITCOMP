@@ -9,7 +9,52 @@
       "url": "https://zip-r0.vercel.app"
     }
   ],
+  
   "paths": {
+    "/ai/briefing": {
+      "post": {
+        "tags": ["AI Recommendation"],
+        "summary": "Get AI Route Briefing",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "originName": { "type": "string" },
+                  "destName": { "type": "string" },
+                  "isNight": { "type": "boolean", "default": false },
+                  "policeCount": { "type": "integer", "default": 0 },
+                  "bellCount": { "type": "integer", "default": 0 },
+                  "safetyScore": { "type": "integer", "default": 50 }
+                },
+                "required": ["originName", "destName"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tagline": { "type": "string" },
+                    "safetyTags": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/auth/signup/ward": {
       "post": {
         "tags": ["Auth & User"],
