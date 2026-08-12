@@ -3,8 +3,14 @@ import json
 from fastapi import APIRouter, status
 from pydantic import BaseModel
 from typing import List
-from google import genai
+import google.generativeai as genai
 from google.genai import types
+
+# API 키 설정
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+
+# 모델 호출 시
+model = genai.GenerativeModel('gemini-2.5-flash')
 
 # 엔드포인트 주소: /ai/briefing
 router = APIRouter(prefix="/ai", tags=["AI Recommendation"])
