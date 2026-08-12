@@ -76,7 +76,8 @@ def send_fcm_notification(target_token: str, title: str, body: str, data_payload
         return True
     except Exception as e:
         print(f"🔴 FCM 전송 실패: {e}")
-        return Falseimport os
+        return False
+import os
 import json
 import firebase_admin
 from firebase_admin import credentials, messaging
