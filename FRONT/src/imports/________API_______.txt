@@ -1,0 +1,64 @@
+# 🔗 모니터링 파트 API 연동 명세서
+
+백엔드 서버 주소: `http://내서버주소` (Swagger: `/docs`)
+
+### 1. 보호자-피보호자 연동 (링크)
+
+보호자가 피보호자의 고유 코드를 입력하여 서로를 연결하는 API입니다.
+
+* **Method & URL**: `POST /monitor/link`
+* **Request Body (JSON)**:
+```json
+{
+  "wardcode": "피보호자_고유코드"
+}
+
+```
+
+
+* **설명**: 피보호자의 고유 코드(`wardcode`)를 서버로 전송하여 보호자와 계정을 매칭합니다.
+
+---
+
+### 2. 피보호자 위치 조회 (보호자용)
+
+보호자가 연결된 피보호자의 실시간 위치 정보를 조회하는 API입니다.
+
+* **Method & URL**: `GET /monitor/wards/{user_id}/location`
+* **Path Parameter**:
+* `user_id`: 피보호자의 고유 ID (UUID)
+
+
+* **Response (JSON)**:
+```json
+{
+  "latitude": 37.5665,
+  "longitude": 126.9780,
+  "address": "서울특별시 중구 세종대로 110",
+  "created_at": "2026-08-09T15:00:00"
+}
+
+```
+
+
+* **설명**: 특정 피보호자(`user_id`)의 최근 위치 좌표(`latitude`, `lng`/`longitude`), 주소(`address`), 갱신 시각(`created_at`)을 받아옵니다.
+
+---
+
+### 3. 피보호자 위치 전송 (피보호자용)
+
+피보호자 기기에서 주기적으로 현재 위치를 서버로 쏘아 올리는(전송하는) API입니다.
+
+* **Method & URL**: `POST /emergency/monitoring/location`
+* **Request Body (JSON)**:
+```json
+{
+  "latitude": 37.5665,
+  "longitude": 126.9780,
+  "address": "서울특별시 중구 세종대로 110"
+}
+
+```
+
+
+* **설명**: 피보호자의 현재 GPS 위치(`latitude`, `longitude`)와 주소(`address`)를 서버에 실시간으로 업로드합니다.
