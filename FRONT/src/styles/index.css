@@ -1,0 +1,8 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* iOS Safari: input focus 시 자동 줌인 방지 — font-size 16px 이상 무조건 강제 */
+input, textarea, select {
+  font-size: 16px !important;
+}
