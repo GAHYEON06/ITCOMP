@@ -9,3 +9,4 @@ passlib[bcrypt]
 python-dotenv
 firebase_admin
 google-generativeai>=0.8.0
+google-genai
