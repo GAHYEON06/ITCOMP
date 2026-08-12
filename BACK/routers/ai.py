@@ -11,7 +11,7 @@ from google.genai import types
 # 엔드포인트 주소: /ai/briefing
 router = APIRouter(prefix="/ai", tags=["AI Recommendation"])
 
-model = genai.GenerativeModel("gemini-1.5-flash")
+# ❌ 문제가 되었던 model = genai.GenerativeModel(...) 줄은 제거했습니다!
 
 # Vercel 환경 변수에서 GEMINI_API_KEY 읽기
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
