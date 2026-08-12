@@ -13,7 +13,8 @@ from routers import (
     fcm,
     users,
     sosbell,
-    fakescreen
+    fakescreen,
+    ai
 )
 
 try:
