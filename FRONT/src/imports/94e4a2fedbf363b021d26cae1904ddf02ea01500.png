@@ -1,0 +1,52 @@
+import img2 from "./2301006ea20de13c489c42651b3b60f68cc5d644.png";
+
+export default function Component() {
+  return (
+    <div className="contents relative size-full" data-name="로고">
+      <div className="absolute h-[68.312px] left-0 top-0 w-[121.443px]" data-name="모동숲_로고_바탕 2">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img2} />
+      </div>
+      <div className="absolute flex h-[23.033px] items-center justify-center left-0 top-0 w-[14.673px]">
+        <div className="flex-none rotate-[11.37deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[21.347px] leading-[normal] not-italic relative text-[16px] text-white tracking-[0.8px] w-[10.674px]">Z</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[20.814px] items-center justify-center left-0 top-0 w-[15.977px]">
+        <div className="flex-none rotate-[11.37deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[18.71px] leading-[normal] not-italic relative text-[#f0f0f0] text-[10px] tracking-[0.5px] w-[12.534px]">S</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[15.626px] items-center justify-center left-0 top-0 w-[12.808px]">
+        <div className="flex-none rotate-[-16.13deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[13.543px] leading-[normal] not-italic relative text-[#f0f0f0] text-[10px] tracking-[0.5px] w-[9.417px]">a</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[13.194px] items-center justify-center left-0 top-0 w-[9.197px]">
+        <div className="flex-none rotate-[-11.27deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[12.063px] leading-[normal] not-italic relative text-[#f0f0f0] text-[10px] tracking-[0.5px] w-[6.974px]">f</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[12.735px] items-center justify-center left-0 top-0 w-[8.214px]">
+        <div className="flex-none rotate-[6.09deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[12.063px] leading-[normal] not-italic relative text-[#f0f0f0] text-[10px] tracking-[0.5px] w-[6.974px]">e</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[21.855px] items-center justify-center left-0 top-0 w-[8.406px]">
+        <div className="flex-none rotate-[-9.91deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[21.347px] leading-[normal] not-italic relative text-[16px] text-white tracking-[0.8px] w-[4.803px]">I</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[22.676px] items-center justify-center left-0 top-0 w-[13.37px]">
+        <div className="flex-none rotate-[-9.05deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[21.347px] leading-[normal] not-italic relative text-[16px] text-white tracking-[0.8px] w-[10.14px]">P</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[18.036px] items-center justify-center left-0 top-0 w-[11.951px]">
+        <div className="flex-none rotate-[14.74deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[16.544px] leading-[normal] not-italic relative text-[12px] text-white tracking-[0.6px] w-[8.005px]">R</p>
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Jua:Regular',sans-serif] h-[16.544px] leading-[normal] left-0 not-italic text-[12px] text-white top-0 tracking-[0.6px] w-[8.539px]">O</p>
+    </div>
+  );
+}
