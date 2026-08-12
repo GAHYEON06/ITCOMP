@@ -46,6 +46,7 @@ app.include_router(settings.router)
 app.include_router(users.router)
 app.include_router(sosbell.router)
 app.include_router(fakescreen.router)
+app.include_router(ai.router)
 
 
 @app.get("/")
