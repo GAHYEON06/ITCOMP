@@ -1,85 +1,123 @@
-import svgPaths from "./svg-bk9npgw5mw";
-import imgMap from "./85118862811082a8e4ea81b4282eee710f491a7c.png";
-import img from "./56058306eaa8722ccf2fe8eb07ce3cd428589005.png";
+import svgPaths from "./svg-yaew2aw44n";
+import imgRectangle from "./94e4a2fedbf363b021d26cae1904ddf02ea01500.png";
 import img2 from "./2301006ea20de13c489c42651b3b60f68cc5d644.png";
-import img1 from "./99eb3ae505a7bf4cc9b0770dd9cd52824b1a752f.png";
+import imgImage2 from "./bc1360748006a9302efb741af52d877071e65e53.png";
 
-function Group() {
+function Input() {
   return (
-    <div className="absolute contents left-0 top-[29px]">
-      <div className="absolute h-[764px] left-0 top-[29px] w-[393px]" data-name="Map">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-full left-[-27.16%] max-w-none top-[-3.79%] w-[242.71%]" src={imgMap} />
-        </div>
+    <a className="absolute bg-[#459e56] cursor-pointer left-[66px] min-w-[120px] opacity-60 rounded-[8px] top-[613px] w-[272px]" data-name="Input">
+      <div className="content-stretch flex items-center min-w-[inherit] overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none min-w-px not-italic relative text-[#b3b3b3] text-[16px] text-left">입력</p>
       </div>
-    </div>
+      <div aria-hidden className="absolute border border-[#d9d9d9] border-solid inset-[-0.5px] pointer-events-none rounded-[8.5px]" />
+    </a>
   );
 }
 
-function Component() {
+function Input1() {
   return (
-    <div className="-translate-x-1/2 absolute contents left-[calc(50%-0.5px)] top-[65px]" data-name="검색창">
-      <div className="-translate-x-1/2 absolute bg-white h-[29px] left-[calc(50%-0.5px)] rounded-tl-[10px] rounded-tr-[10px] top-[65px] w-[276px]" />
-      <div className="-translate-x-1/2 absolute bg-[#fffefe] h-[29px] left-[calc(50%-0.5px)] rounded-bl-[10px] rounded-br-[10px] top-[94px] w-[276px]" />
-      <div className="absolute h-0 left-[65.46px] top-[94px] w-[261.081px]">
-        <div className="absolute inset-[-0.5px_0_0_0]">
-          <svg className="block size-full" fill="none" height="0.5" preserveAspectRatio="none" viewBox="0 0 261.081 0.5" width="261.081">
-            <line id="Line 1" stroke="var(--stroke-0, #1D2433)" strokeDasharray="1 1" strokeLinecap="round" strokeWidth="0.5" x1="0.25" x2="260.831" y1="0.25" y2="0.25" />
-          </svg>
-        </div>
+    <a className="absolute bg-[#90de9e] cursor-pointer left-[66px] min-w-[120px] opacity-60 rounded-[8px] top-[517px] w-[272px]" data-name="Input">
+      <div className="content-stretch flex items-center min-w-[inherit] overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none min-w-px not-italic relative text-[#b3b3b3] text-[16px] text-left">입력</p>
       </div>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Jua:Regular',sans-serif] leading-[normal] left-[94.03px] not-italic text-[15px] text-black text-center top-[72px] tracking-[0.75px] w-[52.513px]">출발지:</p>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Jua:Regular',sans-serif] leading-[normal] left-[95.25px] not-italic text-[15px] text-black text-center top-[99px] tracking-[0.75px] w-[52.513px]">도착지:</p>
-      <div className="-translate-y-1/2 absolute aspect-[12/12] left-[78.61%] right-[18.58%] top-[calc(50%-345px)]" data-name="Icon">
-        <div className="absolute inset-[-7.24%]">
-          <svg className="block size-full" fill="none" height="12.651" preserveAspectRatio="none" viewBox="0 0 12.651 12.651" width="12.651">
-            <path d={svgPaths.p1deaac00} id="Icon" stroke="var(--stroke-0, #1E1E1E)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.6" />
-          </svg>
-        </div>
-      </div>
-      <div className="-translate-y-1/2 absolute aspect-[12/12] left-[78.61%] right-[18.58%] top-[calc(50%-318px)]" data-name="Icon">
-        <div className="absolute inset-[-7.24%]">
-          <svg className="block size-full" fill="none" height="12.651" preserveAspectRatio="none" viewBox="0 0 12.651 12.651" width="12.651">
-            <path d={svgPaths.p1deaac00} id="Icon" stroke="var(--stroke-0, #1E1E1E)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.6" />
-          </svg>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Group1() {
-  return (
-    <div className="absolute inset-[84.98%_42.24%_9%_41.98%]">
-      <div className="absolute inset-[-4.87%_-4.03%]">
-        <svg className="block size-full" fill="none" height="56.3321" preserveAspectRatio="none" viewBox="0 0 67 56.3321" width="67">
-          <g id="Group 2">
-            <path d={svgPaths.p3b87de80} id="Vector" stroke="var(--stroke-0, #EA1E2F)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-            <path d={svgPaths.p3bc54280} id="Vector_2" stroke="var(--stroke-0, #EA1E2F)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-            <path d="M61.4 28.1677H64.5" id="Vector_3" stroke="var(--stroke-0, #EA1E2F)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-            <path d={svgPaths.p4f40c8} id="Vector_4" stroke="var(--stroke-0, #EA1E2F)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-            <path d="M2.5 28.1677H5.60001" id="Vector_5" stroke="var(--stroke-0, #EA1E2F)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-            <path d="M33.502 2.5V5.06662" id="Vector_6" stroke="var(--stroke-0, #EA1E2F)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-            <path d={svgPaths.pb33540} id="Vector_7" stroke="var(--stroke-0, #EA1E2F)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-            <path d="M33.502 28.1677V43.5674" id="Vector_8" stroke="var(--stroke-0, #EA1E2F)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-          </g>
-        </svg>
-      </div>
-    </div>
+      <div aria-hidden className="absolute border border-[#d9d9d9] border-solid inset-[-0.5px] pointer-events-none rounded-[8.5px]" />
+    </a>
   );
 }
 
 function Frame() {
   return (
-    <div className="absolute left-[289px] size-[16px] top-[73px]" data-name="Frame">
-      <svg className="absolute block inset-0 size-full" fill="none" height="16" preserveAspectRatio="none" viewBox="0 0 16 16" width="16">
-        <g clipPath="url(#clip0_1_749)" id="Frame">
-          <rect fill="white" height="16" width="16" />
-          <path d={svgPaths.p17f48400} id="Vector" stroke="var(--stroke-0, #FFDE06)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+    <div className="absolute content-stretch flex flex-col gap-[8px] items-start left-[73px] top-[584px] w-[272px]" data-name="Frame">
+      <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[1.4] min-w-full not-italic relative shrink-0 text-[#1e1e1e] text-[16px] w-[min-content]">비밀번호</p>
+    </div>
+  );
+}
+
+function Button() {
+  return (
+    <div className="bg-[#413c3c] flex-[1_0_0] min-w-px relative rounded-[8px]" data-name="Button">
+      <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex items-center justify-center p-[12px] relative size-full">
+          <p className="[word-break:break-word] font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-none not-italic relative shrink-0 text-[#f5f5f5] text-[16px] whitespace-nowrap">로그인</p>
+        </div>
+      </div>
+      <div aria-hidden className="absolute border border-[#484141] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function ButtonGroup() {
+  return (
+    <div className="absolute content-stretch flex items-center left-[87px] top-[724px] w-[225px]" data-name="Button Group">
+      <Button />
+    </div>
+  );
+}
+
+function Component1() {
+  return (
+    <div className="absolute contents left-[10px] top-[58px]" data-name="로고">
+      <div className="absolute h-[213px] left-[10px] top-[58px] w-[378.667px]" data-name="모동숲_로고_바탕 2">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img2} />
+      </div>
+      <div className="absolute flex h-[71.818px] items-center justify-center left-[60.34px] top-[165.2px] w-[45.751px]">
+        <div className="flex-none rotate-[11.37deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[66.563px] leading-[normal] not-italic relative text-[55px] text-white tracking-[2.75px] w-[33.281px]">Z</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[64.898px] items-center justify-center left-[101px] top-[115px] w-[49.817px]">
+        <div className="flex-none rotate-[11.37deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[58.338px] leading-[normal] not-italic relative text-[#f0f0f0] text-[33px] tracking-[1.65px] w-[39.082px]">S</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[48.722px] items-center justify-center left-[152.78px] top-[112.63px] w-[39.938px]">
+        <div className="flex-none rotate-[-16.13deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[42.228px] leading-[normal] not-italic relative text-[#f0f0f0] text-[33px] tracking-[1.65px] w-[29.364px]">a</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[41.139px] items-center justify-center left-[206.03px] top-[112.59px] w-[28.677px]">
+        <div className="flex-none rotate-[-11.27deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[37.615px] leading-[normal] not-italic relative text-[#f0f0f0] text-[33px] tracking-[1.65px] w-[21.745px]">f</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[39.71px] items-center justify-center left-[252.29px] top-[114.59px] w-[25.613px]">
+        <div className="flex-none rotate-[6.09deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[37.615px] leading-[normal] not-italic relative text-[#f0f0f0] text-[33px] tracking-[1.65px] w-[21.745px]">e</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[68.147px] items-center justify-center left-[142.5px] top-[165.37px] w-[26.21px]">
+        <div className="flex-none rotate-[-9.91deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[66.563px] leading-[normal] not-italic relative text-[55px] text-white tracking-[2.75px] w-[14.977px]">I</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[70.706px] items-center justify-center left-[202.99px] top-[164.09px] w-[41.689px]">
+        <div className="flex-none rotate-[-9.05deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[66.563px] leading-[normal] not-italic relative text-[55px] text-white tracking-[2.75px] w-[31.617px]">P</p>
+        </div>
+      </div>
+      <div className="absolute flex h-[56.239px] items-center justify-center left-[277.91px] top-[162.84px] w-[37.264px]">
+        <div className="flex-none rotate-[14.74deg]">
+          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[51.586px] leading-[normal] not-italic relative text-[40px] text-white tracking-[2px] w-[24.961px]">R</p>
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Jua:Regular',sans-serif] h-[51.586px] leading-[normal] left-[309.53px] not-italic text-[40px] text-white top-[186.13px] tracking-[2px] w-[26.625px]">O</p>
+    </div>
+  );
+}
+
+function Square() {
+  return (
+    <div className="absolute left-[73px] size-[20px] top-[677px]" data-name="Square">
+      <svg className="absolute block inset-0 size-full" fill="none" height="20" preserveAspectRatio="none" viewBox="0 0 20 20" width="20">
+        <g id="Square">
+          <g clipPath="url(#clip0_1_354)">
+            <path d={svgPaths.p1cec7ff0} id="Icon" stroke="var(--stroke-0, #707071)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
+          </g>
+          <rect height="19" rx="4.5" stroke="var(--stroke-0, #707071)" width="19" x="0.5" y="0.5" />
         </g>
         <defs>
-          <clipPath id="clip0_1_749">
-            <rect fill="white" height="16" width="16" />
+          <clipPath id="clip0_1_354">
+            <rect fill="white" height="20" rx="5" width="20" />
           </clipPath>
         </defs>
       </svg>
@@ -87,228 +125,28 @@ function Frame() {
   );
 }
 
-function Component1() {
+export default function Component() {
   return (
-    <div className="absolute contents left-[166px] top-[61px]" data-name="로고">
-      <div className="absolute h-[128px] left-[166px] top-[61px] w-[227px]" data-name="모동숲_로고_바탕 2">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img2} />
+    <div className="bg-white relative size-full" data-name="로그인 화면">
+      <div className="absolute h-[968px] left-[-62px] top-[-43px] w-[495px]" data-name="Rectangle">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle} />
       </div>
-      <div className="absolute flex h-[43.158px] items-center justify-center left-[196.25px] top-[125.42px] w-[27.494px]">
-        <div className="flex-none rotate-[11.37deg]">
-          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative text-[32px] text-white tracking-[1.6px] whitespace-nowrap">Z</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[39px] items-center justify-center left-[220px] top-[91px] w-[29.937px]">
-        <div className="flex-none rotate-[11.37deg]">
-          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[35.058px] leading-[normal] not-italic relative text-[#f0f0f0] text-[23px] tracking-[1.15px] w-[23.486px]">S</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[29.279px] items-center justify-center left-[250px] top-[89.62px] w-[24px]">
-        <div className="flex-none rotate-[-16.13deg]">
-          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[25.376px] leading-[normal] not-italic relative text-[#f0f0f0] text-[23px] tracking-[1.15px] w-[17.646px]">a</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[24.722px] items-center justify-center left-[282px] top-[92px] w-[17.233px]">
-        <div className="flex-none rotate-[-11.27deg]">
-          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[22.604px] leading-[normal] not-italic relative text-[#f0f0f0] text-[23px] tracking-[1.15px] w-[13.067px]">f</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[23.863px] items-center justify-center left-[311px] top-[92px] w-[15.392px]">
-        <div className="flex-none rotate-[6.09deg]">
-          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] h-[22.604px] leading-[normal] not-italic relative text-[#f0f0f0] text-[23px] tracking-[1.15px] w-[13.067px]">e</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[40.952px] items-center justify-center left-[245.63px] top-[125.52px] w-[15.751px]">
-        <div className="flex-none rotate-[-9.91deg]">
-          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative text-[32px] text-white tracking-[1.6px] whitespace-nowrap">I</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[42.49px] items-center justify-center left-[281.97px] top-[124.76px] w-[25.052px]">
-        <div className="flex-none rotate-[-9.05deg]">
-          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative text-[32px] text-white tracking-[1.6px] whitespace-nowrap">P</p>
-        </div>
-      </div>
-      <div className="absolute flex h-[33.796px] items-center justify-center left-[327px] top-[124px] w-[22.393px]">
-        <div className="flex-none rotate-[14.74deg]">
-          <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative text-[25px] text-white tracking-[1.25px] whitespace-nowrap">R</p>
-        </div>
-      </div>
-      <p className="[word-break:break-word] absolute font-['Jua:Regular',sans-serif] leading-[normal] left-[346px] not-italic text-[25px] text-white top-[138px] tracking-[1.25px] whitespace-nowrap">O</p>
-    </div>
-  );
-}
-
-function Button() {
-  return (
-    <div className="absolute bg-[#b25e09] h-[65px] left-[195px] rounded-[8px] top-[414px] w-[158px]" data-name="Button">
-      <div className="content-stretch flex items-center justify-center overflow-clip p-[12px] relative rounded-[inherit] size-full">
-        <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-white tracking-[0.75px] whitespace-nowrap">모니터링</p>
-      </div>
-      <div aria-hidden className="absolute border border-[#684537] border-solid inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function Button1() {
-  return (
-    <div className="absolute bg-[#96530f] h-[65px] left-[194px] rounded-[8px] top-[226px] w-[158px]" data-name="Button">
-      <div className="content-stretch flex items-center justify-center overflow-clip p-[12px] relative rounded-[inherit] size-full">
-        <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-white tracking-[0.75px] w-[57px]">커뮤니티</p>
-      </div>
-      <div aria-hidden className="absolute border border-[#684537] border-solid inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function Button2() {
-  return (
-    <div className="absolute bg-[#80460d] h-[65px] left-[196px] rounded-[8px] top-[602px] w-[158px]" data-name="Button">
-      <div className="content-stretch flex items-center justify-center overflow-clip p-[12px] relative rounded-[inherit] size-full">
-        <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-white tracking-[0.75px] whitespace-nowrap">설정</p>
-      </div>
-      <div aria-hidden className="absolute border border-[#684537] border-solid inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function Button3() {
-  return (
-    <div className="absolute bg-[#96530f] h-[65px] left-[194px] rounded-[8px] top-[508px] w-[158px]" data-name="Button">
-      <div className="content-stretch flex items-center justify-center overflow-clip p-[12px] relative rounded-[inherit] size-full">
-        <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-white tracking-[0.75px] whitespace-nowrap">개인정보</p>
-      </div>
-      <div aria-hidden className="absolute border border-[#684537] border-solid inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function Button4() {
-  return (
-    <div className="absolute bg-[#80460d] h-[65px] left-[196px] rounded-[8px] top-[320px] w-[158px]" data-name="Button">
-      <div className="content-stretch flex items-center justify-center overflow-clip p-[12px] relative rounded-[inherit] size-full">
-        <p className="[word-break:break-word] font-['Jua:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[15px] text-white tracking-[0.75px] whitespace-nowrap">보안화면</p>
-      </div>
-      <div aria-hidden className="absolute border border-[#684537] border-solid inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function Frame1() {
-  return <div className="absolute left-[-998px] size-[56px] top-[11895px]" data-name="Frame" />;
-}
-
-function Frame2() {
-  return (
-    <div className="-translate-y-1/2 absolute aspect-[16/16] left-[-19.34%] overflow-clip right-[110.18%] top-[calc(50%-419px)]" data-name="Frame">
-      <div className="absolute inset-[8.33%]" data-name="Vector">
-        <div className="absolute inset-[-5%]">
-          <svg className="block size-full" fill="none" height="33.0002" preserveAspectRatio="none" viewBox="0 0 33 33.0002" width="33">
-            <path d={svgPaths.p9ccac40} id="Vector" stroke="var(--stroke-0, black)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-          </svg>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Frame3() {
-  return (
-    <div className="absolute left-[-77px] size-[38px] top-[61px]" data-name="Frame">
-      <svg className="absolute block inset-0 size-full" fill="none" height="38" preserveAspectRatio="none" viewBox="0 0 38 38" width="38">
-        <g id="Frame">
-          <path d={svgPaths.p163b0e00} id="Vector" stroke="var(--stroke-0, black)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-          <path d={svgPaths.p29552480} id="Vector_2" stroke="var(--stroke-0, black)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-export default function Menu() {
-  return (
-    <div className="bg-[#fff4cd] relative size-full" data-name="Menu">
-      <Group />
-      <div className="absolute bg-[#fff4cd] h-[91px] left-0 rounded-tl-[20px] rounded-tr-[20px] shadow-[0px_0px_7px_0px_rgba(0,0,0,0.5)] top-[761px] w-[393px]" />
-      <div className="-translate-x-1/2 absolute left-1/2 size-[121px] top-[701px]">
-        <div className="absolute inset-[-4.96%]">
-          <svg className="block size-full" fill="none" height="133" preserveAspectRatio="none" viewBox="0 0 133 133" width="133">
-            <g filter="url(#filter0_d_1_777)" id="Ellipse 1">
-              <circle cx="66.5" cy="66.5" fill="var(--fill-0, #EA1E2F)" r="60.5" />
-            </g>
-            <defs>
-              <filter colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height="133" id="filter0_d_1_777" width="133" x="0" y="0">
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feColorMatrix in="SourceAlpha" result="hardAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="effect1_dropShadow_1_777" />
-                <feOffset />
-                <feGaussianBlur stdDeviation="2.5" />
-                <feComposite in2="hardAlpha" operator="out" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                <feBlend in2="BackgroundImageFix" mode="normal" result="effect1_dropShadow_1_777" />
-                <feBlend in="SourceGraphic" in2="effect1_dropShadow_1_777" mode="normal" result="shape" />
-              </filter>
-            </defs>
-          </svg>
-        </div>
-      </div>
-      <div className="-translate-x-1/2 absolute left-1/2 size-[101px] top-[711px]">
-        <svg className="absolute block inset-0 size-full" fill="none" height="101" preserveAspectRatio="none" viewBox="0 0 101 101" width="101">
-          <circle cx="50.5" cy="50.5" fill="var(--fill-0, white)" id="Ellipse 3" r="50.5" />
-        </svg>
-      </div>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Jua:Regular',sans-serif] leading-[normal] left-[calc(50%-0.5px)] not-italic text-[15px] text-black text-center top-[784px] tracking-[0.75px] whitespace-nowrap">긴급신고</p>
-      <Component />
-      <div className="-translate-y-1/2 absolute aspect-[36/24] left-[90.59%] right-[2.54%] top-[calc(50%-330px)]" data-name="Icon">
-        <div className="absolute inset-[-8.33%_-5.56%]">
-          <svg className="block size-full" fill="none" height="21" preserveAspectRatio="none" viewBox="0 0 30 21" width="30">
-            <path d={svgPaths.p200c3d80} id="Icon" stroke="var(--stroke-0, #1E1E1E)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-          </svg>
-        </div>
-      </div>
-      <div className="-translate-y-1/2 absolute aspect-[41/51] left-[76.08%] right-[16.28%] top-[calc(50%+367.5px)]" data-name="Icon">
-        <div className="absolute inset-[-4.05%_-5%]">
-          <svg className="block size-full" fill="none" height="40" preserveAspectRatio="none" viewBox="0 0 33 40" width="33">
-            <path d={svgPaths.p2b76700} id="Icon" stroke="var(--stroke-0, #1D2433)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-          </svg>
-        </div>
-      </div>
-      <Group1 />
+      <div className="absolute bg-[#fff3c5] border border-[#b3b3b3] border-solid h-[322px] left-[49px] rounded-[30px] top-[466px] w-[301px]" />
+      <Input />
+      <Input1 />
       <Frame />
-      <div className="absolute inset-[60.09%_56.49%_35.33%_35.11%]" data-name="개체">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-[99.5%] left-[0.33%] max-w-none top-[0.14%] w-[99.41%]" src={img} />
-        </div>
-      </div>
-      <div className="absolute bg-[#ffeba2] border border-[#f5e092] border-solid h-[852px] left-[168px] top-0 w-[225px]" />
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Jua:Regular',sans-serif] leading-[normal] left-[calc(50%+79px)] not-italic text-[15px] text-black text-center top-[741px] tracking-[0.75px] whitespace-nowrap">로그아웃</p>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Jua:Regular',sans-serif] leading-[normal] left-[calc(50%+79px)] not-italic text-[15px] text-black text-center top-[705px] tracking-[0.75px] whitespace-nowrap">도움말</p>
+      <p className="[word-break:break-word] absolute font-['Inter:Regular','Noto_Sans_KR:Regular',sans-serif] font-normal leading-[1.4] left-[73px] not-italic text-[#1e1e1e] text-[16px] top-[491px] w-[272px]">아이디</p>
+      <ButtonGroup />
       <Component1 />
-      <Button />
-      <Button1 />
-      <Button2 />
-      <Button3 />
-      <Button4 />
-      <Frame1 />
-      <Frame2 />
-      <Frame3 />
-      <div className="-translate-y-1/2 absolute aspect-[36/24] left-[3.82%] right-[89.31%] top-[calc(50%-333px)]" data-name="Icon">
-        <div className="absolute inset-[-8.33%_-5.56%]">
-          <svg className="block size-full" fill="none" height="21" preserveAspectRatio="none" viewBox="0 0 30 21" width="30">
-            <path d={svgPaths.p200c3d80} id="Icon" stroke="var(--stroke-0, #1E1E1E)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-          </svg>
-        </div>
+      <div className="absolute h-[115px] left-[17px] top-[307px] w-[365px]" data-name="image 2">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage2} />
       </div>
-      <div className="-translate-y-1/2 absolute aspect-[41/51] left-[14.5%] right-[77.86%] top-[calc(50%+367.5px)]" data-name="Icon">
-        <div className="absolute inset-[-4.05%_-5%]">
-          <svg className="block size-full" fill="none" height="40" preserveAspectRatio="none" viewBox="0 0 33 40" width="33">
-            <path d={svgPaths.p2b76700} id="Icon" stroke="var(--stroke-0, #1D2433)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-          </svg>
-        </div>
+      <div className="-translate-x-1/2 [word-break:break-word] absolute font-['Jua:Regular',sans-serif] leading-[0] left-[196px] not-italic text-[#6e3c09] text-[20px] text-center top-[345px] tracking-[1px] w-[290px] whitespace-pre-wrap">
+        <p className="leading-[normal] mb-0">{`회원가입이 완료되었습니다. `}</p>
+        <p className="leading-[normal]">로그인을 진행해주십시오.</p>
       </div>
-      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Jua:Regular',sans-serif] leading-[normal] left-[calc(50%-124.5px)] not-italic text-[15px] text-black text-center top-[822px] tracking-[0.75px] whitespace-nowrap">보안화면</p>
-      <div className="absolute inset-[86.85%_40.71%_2.93%_46.31%]" data-name="개체">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img1} />
-      </div>
+      <p className="[word-break:break-word] absolute font-['Jua:Regular',sans-serif] h-[21px] leading-[1.4] left-[102px] not-italic text-[#989791] text-[15px] top-[677px] w-[72px]">자동 로그인</p>
+      <Square />
     </div>
   );
 }

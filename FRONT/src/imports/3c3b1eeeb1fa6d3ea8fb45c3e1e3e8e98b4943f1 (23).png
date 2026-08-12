@@ -1,0 +1,66 @@
+import svgPaths from "./svg-bujj8xi748";
+
+function Group1() {
+  return (
+    <div className="absolute left-0 size-[101px] top-0">
+      <svg className="absolute block inset-0 size-full" fill="none" height="101" preserveAspectRatio="none" viewBox="0 0 101 101" width="101">
+        <g id="Group 3">
+          <circle cx="50.5" cy="50.5" fill="white" id="Ellipse 3" r="50.5" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function Group() {
+  return (
+    <div className="-translate-x-1/2 absolute h-[51.333px] left-0 top-0 w-[62px]">
+      <div className="absolute inset-[-4.87%_-4.03%]">
+        <svg className="block size-full" fill="none" height="56.3321" preserveAspectRatio="none" viewBox="0 0 67 56.3321" width="67">
+          <g id="Group 2">
+            <path d={svgPaths.p3b87de80} id="Vector" stroke="#EA1E2F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+            <path d={svgPaths.p3bc54280} id="Vector_2" stroke="#EA1E2F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+            <path d="M61.4 28.1677H64.5" id="Vector_3" stroke="#EA1E2F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+            <path d={svgPaths.p4f40c8} id="Vector_4" stroke="#EA1E2F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+            <path d="M2.5 28.1677H5.60001" id="Vector_5" stroke="#EA1E2F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+            <path d="M33.502 2.5V5.06662" id="Vector_6" stroke="#EA1E2F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+            <path d={svgPaths.pb33540} id="Vector_7" stroke="#EA1E2F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+            <path d="M33.502 28.1677V43.5674" id="Vector_8" stroke="#EA1E2F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+export default function Group2() {
+  return (
+    <div className="contents relative size-full">
+      <div className="-translate-x-1/2 absolute left-0 size-[121px] top-0">
+        <div className="absolute inset-[-4.96%]">
+          <svg className="block size-full" fill="none" height="133" preserveAspectRatio="none" viewBox="0 0 133 133" width="133">
+            <g filter="url(#filter0_d_0_15)" id="Ellipse 1">
+              <circle cx="66.5" cy="66.5" fill="#EA1E2F" r="60.5" />
+            </g>
+            <defs>
+              <filter colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height="133" id="filter0_d_0_15" width="133" x="0" y="0">
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                <feColorMatrix in="SourceAlpha" result="hardAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="effect1_dropShadow_0_15" />
+                <feOffset />
+                <feGaussianBlur stdDeviation="2.5" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                <feBlend in2="BackgroundImageFix" mode="normal" result="effect1_dropShadow_0_15" />
+                <feBlend in="SourceGraphic" in2="effect1_dropShadow_0_15" mode="normal" result="shape" />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      <Group1 />
+      <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Jua:Regular',sans-serif] h-[1.114px] leading-[normal] left-0 not-italic text-[15px] text-black text-center top-0 tracking-[0.75px] w-[50px]">긴급신고</p>
+      <Group />
+    </div>
+  );
+}

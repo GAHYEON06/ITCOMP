@@ -1,10 +1,114 @@
-export default {
-p1d9e2800: "M27.7083 19.5H7.29167M17.5 8.125L7.29167 19.5L17.5 30.875",
-p2b76700: "M16.5 38.5C16.5 38.5 31.5 31.1 31.5 20V7.05L16.5 1.5L1.5 7.05V20C1.5 31.1 16.5 38.5 16.5 38.5Z",
-p313e2cc0: "M26.6667 16.6667C26.6667 17.5507 26.3155 18.3986 25.6904 19.0237C25.0652 19.6488 24.2174 20 23.3333 20H11.38C10.496 20.0002 9.64831 20.3515 9.02333 20.9767L5.35333 24.6467C5.18784 24.8121 4.97701 24.9248 4.74748 24.9705C4.51796 25.0161 4.28005 24.9927 4.06384 24.9031C3.84764 24.8136 3.66284 24.6619 3.53281 24.4673C3.40278 24.2728 3.33336 24.044 3.33333 23.81V6.66667C3.33333 5.78261 3.68452 4.93476 4.30964 4.30964C4.93476 3.68452 5.78261 3.33333 6.66667 3.33333H23.3333C24.2174 3.33333 25.0652 3.68452 25.6904 4.30964C26.3155 4.93476 26.6667 5.78261 26.6667 6.66667V16.6667Z",
-p3b87de80: "M18.0019 43.5683V28.1686C18.0019 24.765 19.6349 21.5009 22.5417 19.0942C25.4485 16.6876 29.391 15.3355 33.5019 15.3355C37.6128 15.3355 41.5553 16.6876 44.4621 19.0942C47.3689 21.5009 49.0019 24.765 49.0019 28.1686V43.5683",
-p3bc54280: "M11.7993 51.2655C11.7993 51.9462 12.126 52.599 12.7073 53.0804C13.2887 53.5617 14.0772 53.8321 14.8994 53.8321H52.0994C52.9216 53.8321 53.7101 53.5617 54.2915 53.0804C54.8728 52.599 55.1994 51.9462 55.1994 51.2655V48.6989C55.1994 47.3374 54.5462 46.0318 53.3835 45.0691C52.2208 44.1065 50.6438 43.5656 48.9994 43.5656H17.9994C16.355 43.5656 14.778 44.1065 13.6153 45.0691C12.4526 46.0318 11.7993 47.3374 11.7993 48.6989V51.2655Z",
-p4f40c8: "M53.6507 8.91775L52.1007 10.2011",
-pa1ce23e: "M33.3333 15C34.2174 15 35.0652 15.3512 35.6904 15.9763C36.3155 16.6014 36.6667 17.4493 36.6667 18.3333V35.4767C36.6666 35.7107 36.5972 35.9394 36.4672 36.134C36.3372 36.3286 36.1524 36.4802 35.9362 36.5698C35.7199 36.6593 35.482 36.6828 35.2525 36.6371C35.023 36.5915 34.8122 36.4788 34.6467 36.3133L30.9767 32.6433C30.3517 32.0182 29.504 31.6669 28.62 31.6667H16.6667C15.7826 31.6667 14.9348 31.3155 14.3096 30.6904C13.6845 30.0652 13.3333 29.2174 13.3333 28.3333V26.6667",
-pb33540: "M11.5821 10.0195L13.7738 11.8341",
+import { motion } from "motion/react";
+import imgRectangle from "./94e4a2fedbf363b021d26cae1904ddf02ea01500.png";
+import img from "./fda34ed29b3ac5cdd4b6375a53a7e7b55606ca8c.png";
+import img1 from "./83795503889567fd120b8de6de15d223ff4a1a82.png";
+import img2 from "./3c3b1eeeb1fa6d3ea8fb45c3e1e3e8e98b4943f1.png";
+import img3 from "./f6dd02823fd49ecff1217815f177361651219301.png";
+import imgImage1 from "./bc1360748006a9302efb741af52d877071e65e53.png";
+
+export default function Loading() {
+  return (
+    <div className="bg-white relative size-full" data-name="Loading">
+      <div className="absolute h-[968px] left-[-62px] top-[-43px] w-[495px]" data-name="Rectangle">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle} />
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[50.84708590042737/50.89684417190597] flex items-center justify-center left-[37.15%] right-[49.91%] top-[calc(50%+267.45px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(51.1762cqw,47.4967cqh)] rotate-[-47.11deg] w-[hypot(48.8238cqw,-52.5033cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[20.792565122364095/21.337221991665558] flex items-center justify-center left-[40.71%] right-[54%] top-[calc(50%+78.67px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(98.6058cqw,-1.32297cqh)] rotate-[-90.79deg] w-[hypot(-1.39419cqw,-98.677cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[35.623879854403185/34.16859347268087] flex items-center justify-center left-[33.84%] right-[57.09%] top-[calc(50%+196.08px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(-31.0452cqw,63.1549cqh)] rotate-[27.14deg] w-[hypot(68.9548cqw,36.8451cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img1} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[24.519500327664616/25.80869367294065] flex items-center justify-center left-[28.24%] right-[65.52%] top-[calc(50%+54.9px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(66.9979cqw,27.5432cqh)] rotate-[-66.6deg] w-[hypot(33.0021cqw,-72.4568cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img1} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[28.822228198254265/28.419771659138632] flex items-center justify-center left-[16.03%] right-[76.64%] top-[calc(50%+54.21px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(41.392cqw,52.2146cqh)] rotate-[-38.8deg] w-[hypot(58.608cqw,-47.7854cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img1} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[53.16375632909046/52.2655807986622] flex items-center justify-center left-[33.84%] right-[52.63%] top-[calc(50%+344.13px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(-24.3887cqw,74.3314cqh)] rotate-[18.46deg] w-[hypot(75.6113cqw,25.6686cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img2} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[27.396504486458298/27.368127092033887] flex items-center justify-center left-[53.94%] right-[39.08%] top-[calc(50%+85.68px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(47.6293cqw,50.6668cqh)] rotate-[-43.26deg] w-[hypot(52.3707cqw,-49.3332cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img2} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[69.52151197422313/66.86011587384132] flex items-center justify-center left-[48.6%] right-[33.71%] top-[calc(50%+387.43px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(31.4353cqw,63.0248cqh)] rotate-[-27.41deg] w-[hypot(68.5647cqw,-36.9752cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img3} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[36.70640978525353/36.95394711484096] flex items-center justify-center left-[40.46%] right-[50.2%] top-[calc(50%+154.48px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(-49.6499cqw,44.212cqh)] rotate-[48.12deg] w-[hypot(50.3501cqw,55.788cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img3} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 absolute aspect-[43.94909116194458/43.505730640044476] flex items-center justify-center left-[19.08%] right-[69.73%] top-[calc(50%+235.07px)]" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(30.3608cqw,68.5037cqh)] rotate-[-24.12deg] w-[hypot(69.6392cqw,-31.4963cqh)]">
+          <motion.div className="relative size-full" data-name="개체">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={img} />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <div className="absolute h-[115px] left-[8px] top-[177px] w-[365px]" data-name="image 1">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage1} />
+      </div>
+      <motion.div className="[word-break:break-word] absolute font-['Jua:Regular',sans-serif] h-[66px] leading-[0] left-[calc(50%-6px)] not-italic text-[#7e4c34] text-[29px] text-center top-[207px] tracking-[1.45px] w-[281px]">
+        <p className="leading-[normal] mb-0">안전한 집을 향해 ...</p>
+        <p className="leading-[normal]">조금만 기다려주세요</p>
+      </motion.div>
+    </div>
+  );
 }

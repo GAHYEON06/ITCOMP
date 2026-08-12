@@ -1,0 +1,11 @@
+import img from "./ced709845bdb9c9f309508a14cced3ddb1ec2b02.png";
+
+export default function Frame() {
+  return (
+    <div className="content-stretch flex flex-col items-start p-[10px] relative size-full">
+      <div className="h-[300px] relative shrink-0 w-[314px]" data-name="아이콘">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" height="300" src={img} width="314" />
+      </div>
+    </div>
+  );
+}
