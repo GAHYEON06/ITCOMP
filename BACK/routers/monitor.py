@@ -462,7 +462,7 @@ async def websocket_endpoint(
         logger.info(f"[WS Closed] Client disconnected from session {session_id}")
     except Exception as e:
         logger.error(f"[WS Error] {e}")
-        manager.disconnect(session_id, websocket)import time
+        manager.disconnect(session_id, websocket)
 import uuid
 import datetime
 import logging
