@@ -408,7 +408,7 @@ def ward_location(id: str, db: Session = Depends(get_db), u: User = Depends(curr
 
 
 # ==========================================
-# 5. [3단계 신규] 실시간 위치 중계 WebSocket
+# 5. [3단계] 실시간 위치 중계 WebSocket
 # ==========================================
 @router.websocket("/ws/{session_id}")
 async def websocket_endpoint(
@@ -439,15 +439,13 @@ async def websocket_endpoint(
                 lat = data.get("lat")
                 lng = data.get("lng")
                 
-                # 1) DB에 위치 이력 비동기 기록 (monitoring_location_logs)
-                if lat and lng:
+                # 1) DB에 위치 이력 기록 (models.py의 기존 컬럼명 latitude, longitude 적용)
+                if lat is not None and lng is not None:
                     try:
                         log_entry = models.MonitoringLocationLog(
-                            id=str(uuid.uuid4()),
                             session_id=session_id,
-                            lat=lat,
-                            lng=lng,
-                            recorded_at=datetime.datetime.utcnow()
+                            latitude=float(lat),    # 👈 models.py 필드명
+                            longitude=float(lng)   # 👈 models.py 필드명
                         )
                         db.add(log_entry)
                         db.commit()
@@ -481,28 +479,8 @@ async def websocket_endpoint(
         logger.info(f"[WS Closed] Client disconnected from session {session_id}")
     except Exception as e:
         logger.error(f"[WS Error] {e}")
-        manager.disconnect(session_id, websocket)import time
-import uuid
-import datetime
-import logging
-import json
-from typing import Optional, Literal, Any, Dict, List
-
-import requests
-from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect
-from sqlalchemy.orm import Session
-from pydantic import BaseModel, Field
-
-from database import get_db
-import models
-from models import User, UserRelationship, SirenLog
-from .deps import current_user
-from .fcm_service import send_fcm_notification
-
-logger = logging.getLogger("monitor")
-
-router = APIRouter(prefix="/api/v1/monitoring", tags=["Monitor & Matching"])
-
+        manager.disconnect(session_id, websocket)
+        
 # ==========================================
 # 1. WebSocket 커넥션 매니저 (룸 기반 브로드캐스팅)
 # ==========================================
